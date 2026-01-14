@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicinal Garden Wear | San Antonio Research</title>
+<style>
+:root { --garden-green: #2d5a27; --earth-tan: #f9fdf9; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; background-color: var(--earth-tan); color: #333; }
+header { background: white; padding: 2rem; text-align: center; border-bottom: 3px solid var(--garden-green); }
+.container { max-width: 800px; margin: auto; padding: 20px; }
+.card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; border: 1px solid #ddd; }
+h1, h2 { color: var(--garden-green); }
+.calc-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+.btn { background: var(--garden-green); color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; width: 100%; font-weight: bold; }
+.btn:hover { opacity: 0.9; }
+.result-box { margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 5px solid var(--garden-green); display: none; }
+footer { text-align: center; font-size: 0.8rem; padding: 2rem; color: #777; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Medicinal Garden Wear</h1>
+<p>Science-Backed. Soil-Grown. San Antonio Rooted.</p>
+</header>
+
+<div class="container">
+<div class="card" style="text-align: center;">
+<h2>Signature Botanical Crest Tee</h2>
+<p>Support our Moringa & Chiltepín research in style.</p>
+<p style="font-size: 1.5rem; font-weight: bold;">$35.00</p>
+<button class="btn" onclick="window.location.href='YOUR_STRIPE_LINK_HERE'">Buy Now</button>
+</div>
+
+<div class="card">
+<h2>Precision Dose Calculator</h2>
+<p>Based on our proprietary 6.5 | 2.5 | 41.0 research ratio.</p>
+
+<label>Body Weight (lbs):</label>
+<input type="number" id="weight" class="calc-input" placeholder="e.g. 150">
+
+<label>Research Goal:</label>
+<select id="goal" class="calc-input">
+<option value="1">Maintenance Support</option>
+<option value="2">Therapeutic Research Support</option>
+</select>
+
+<button class="btn" onclick="calculate()">Calculate Dose</button>
+
+<div id="result" class="result-box">
+<p><strong>Estimated Daily Dose:</strong></p>
+<h2 id="capsule-count">0 Capsules</h2>
+<p id="breakdown" style="font-size: 0.9rem;"></p>
+<p style="font-size: 0.7rem; color: #666;">*Consult a physician before starting any new botanical regimen.</p>
+</div>
+</div>
+</div>
+
+<footer>
+<p>&copy; 2026 Medicinal Garden LLC | San Antonio, TX</p>
+<p>These statements have not been evaluated by the FDA.</p>
+</footer>
+
+<script>
+function calculate() {
+const weight = document.getElementById('weight').value;
+const goal = document.getElementById('goal').value;
+if(!weight) return alert("Please enter weight");
+
+let totalCaps = Math.round((weight / 50) * goal);
+if (totalCaps < 2) totalCaps = 2;
+
+// Based on your 100-capsule mix: 6.5g seed, 2.5g Chiltepín, 41.0g leaf
+let leaf = (totalCaps * 0.41).toFixed(2);
+let seed = (totalCaps * 0.065).toFixed(2);
+
+document.getElementById('result').style.display = 'block';
+document.getElementById('capsule-count').innerText = totalCaps + " Capsules";
+document.getElementById('breakdown').innerText = `Estimated content: ${leaf}g Moringa Leaf and ${seed}g Moringa Seed.`;
+}
+</script>
+
+</body>
+</html>
