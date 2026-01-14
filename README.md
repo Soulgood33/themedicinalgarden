@@ -1,2 +1,2 @@
 # themedicinalgarden
-Research and apparel 
+Official site for Medicinal Garden LLC research and apparel.
