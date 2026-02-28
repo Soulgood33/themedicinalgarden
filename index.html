@@ -3,48 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Medicinal Garden | Research & Wellness</title>
+<title>Medicinal Garden | San Antonio Research</title>
 <style>
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; color: #333; }
-header { background: #2d5a27; color: white; padding: 2rem text-align: center; }
-nav { background: #eee; padding: 10px; text-align: center; }
-.container { max-width: 800px; margin: auto; padding: 20px; }
-.hero { text-align: center; padding: 50px 20px; background: #f4fbf4; }
-h1, h2 { color: #2d5a27; }
-.card { border-left: 5px solid #2d5a27; background: #fafafa; padding: 15px; margin: 20px 0; }
-footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #777; }
+body { font-family: -apple-system, sans-serif; line-height: 1.6; margin: 0; background-color: #fcfcfc; color: #333; text-align: center; }
+.header { padding: 40px 20px; background: #fff; border-bottom: 1px solid #eee; }
+.header h1 { color: #2d5a27; margin: 0; }
+.product-card { background: #fff; border: 1px solid #ddd; border-radius: 12px; margin: 20px auto; padding: 25px; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.price { font-size: 1.8rem; font-weight: bold; color: #2d5a27; margin: 15px 0; }
+.btn { background: #2d5a27; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; width: 100%; font-weight: bold; }
+.calc-container { background: #f4fbf4; padding: 40px 20px; margin-top: 30px; }
+.calc-box { background: white; padding: 30px; border-radius: 12px; max-width: 400px; margin: 0 auto; text-align: left; border: 1px solid #c3dbc3; }
+input, select { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+.result { display: none; margin-top: 20px; padding: 20px; background: #e8f5e8; border-radius: 8px; text-align: center; border: 1px solid #2d5a27; }
+.disclaimer { font-size: 0.75rem; color: #888; padding: 40px; }
 </style>
 </head>
 <body>
 
-<header>
-<h1>The Medicinal Garden</h1>
-<p>San Antonio, Texas</p>
-</header>
-
-<div class="hero">
-<h2>Pioneering Medicinal Plant Research</h2>
-<p>Dedicated to exploring the intersection of nature and science in Diabetes and Cancer research.</p>
+<div class="header">
+<h1>Medicinal Garden</h1>
+<p>Science-Backed. Soil-Grown. San Antonio Rooted.</p>
 </div>
 
-<div class="container">
-<section>
-<h2>Our Focus</h2>
-<div class="card">
-<h3>Botanical Research</h3>
-<p>We are currently studying specific medicinal plants for their potential in managing Diabetes and supporting Cancer treatments.</p>
-</div>
-</section>
-
-<section>
-<h2>Get In Touch</h2>
-<p>Medicinal Garden LLC is located in San Antonio. For inquiries regarding our research or products, please contact us.</p>
-</section>
+<div class="product-card">
+<h2>The Triple Formula Bundle</h2>
+<p>Formula One Plus (Leaf) • Perseid (Seed) • Super Cayenne (Chiltepín)</p>
+<div class="price">$40.00</div>
+<button class="btn">Order for Research</button>
 </div>
 
-<footer>
-<p>&copy; 2026 Medicinal Garden LLC. All rights reserved.</p>
-</footer>
+<div class="calc-container">
+<div class="calc-box">
+<h2 style="text-align: center;">Precision Dose Calculator</h2>
+<label>Body Weight (lbs):</label>
+<input type="number" id="weight" placeholder="e.g. 150">
 
+<label>Research Protocol:</label>
+<select id="protocol">
+<option value="1">Maintenance Support</option>
+<option value="2">Therapeutic Research Support</option>
+</select>
+
+<button class="btn" onclick="runCalc()">Calculate Mix</button>
+
+<div id="resultBox" class="result">
+<h3>Recommended Daily Intake:</h3>
+<p id="totalCaps" style="font-size: 1.4rem; font-weight: bold; color: #2d5a27;"></p>
+<hr style="border: 0; border-top: 1px solid #c3dbc3; margin: 15px 0;">
+<p id="leafDose"></p>
+<p id="seedDose"></p>
+<p id="pepperDose"></p>
+</div>
+</div>
+</div>
+
+<div class="disclaimer">
+<p>© 2026 Medicinal Garden LLC | San Antonio, TX</p>
+<p>*This calculator provides estimates based on research weight ratios. Consult with a healthcare professional.</p>
+</div>
+
+<script>
+function runCalc() {
+const weight = document.getElementById('weight').value;
+const multiplier = parseInt(document.getElementById('protocol').value);
+
+if(!weight) { alert("Please enter weight"); return; }
+
+// Math: Base count per 50lbs
+let totalCaps = Math.round((weight / 50) * multiplier);
+if (totalCaps < 2) totalCaps = 2;
+
+// Ratios for your 100-cap mix (41g/6.5g/2.5g)
+const leaf = (totalCaps * 0.41).toFixed(2);
+const seed = (totalCaps * 0.065).toFixed(2);
+const pepper = (totalCaps * 0.025).toFixed(2);
+
+document.getElementById('totalCaps').innerText = totalCaps + " Capsules Total";
+document.getElementById('leafDose').innerText = "Formula One Plus: " + leaf + "g";
+document.getElementById('seedDose').innerText = "Perseid: " + seed + "g";
+document.getElementById('pepperDose').innerText = "Super Cayenne: " + pepper + "g";
+document.getElementById('resultBox').style.display = "block";
+}
+</script>
 </body>
 </html>
